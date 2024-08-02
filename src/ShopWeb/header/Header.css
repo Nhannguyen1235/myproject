@@ -1,7 +1,36 @@
-.custom-header{
-    height:57px;
-    position: fixed;
-}
-.navbar{
-    background:rgb(30, 30, 35) 0px;
-}
+.custom-header {
+    height: 11vh;
+  }
+  
+  .navbar {
+    background: rgb(30, 30, 35);
+  }
+  
+  #logo {
+    width: 80px;
+  }
+  
+  .nav-item-right {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-item {
+    list-style: none;
+    color: white;
+    padding: 5px;
+  }
+  
+  @media (min-width: 768px) {
+    .nav-item-right {
+      margin-left: auto;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .nav-item-right {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+  
