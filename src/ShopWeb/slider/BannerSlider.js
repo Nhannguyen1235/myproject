@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import { nextSlide, prevSlide, setSlide } from '../redux/sliderSlice';
 import img_slider from '../../imgs/gscd1.jpg';
-import img_slider2 from '../../imgs/gscd1.jpg';
-import img_slider3 from '../../imgs/gscd1.jpg';
-import img_slider4 from '../../imgs/gscd1.jpg';
+import img_slider2 from '../../imgs/maxresdefault.jpg';
+import img_slider3 from '../../imgs/banner-fashion_113854663.jpg';
+import img_slider4 from '../../imgs/1931319.jpg';
 import './Slider.css';
 
 export default function Slider() {
@@ -39,6 +41,11 @@ export default function Slider() {
             initialSlide={currentSlide}
             pagination={{ clickable: true }}
             navigation
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay, Pagination, Navigation]}
           >
             {[img_slider, img_slider2, img_slider3, img_slider4].map((img, index) => (
               <SwiperSlide key={index}>

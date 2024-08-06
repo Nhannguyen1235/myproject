@@ -34,13 +34,13 @@ export default function Header() {
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar className="me-auto">
               <NavItem>
-                <NavLink href="">Trang chủ</NavLink>
+                <NavLink href="/">Trang chủ</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Sản phẩm</NavLink>
+                <NavLink href="/products">Sản phẩm</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="">Liên hệ</NavLink>
+                <NavLink href="/contact">Liên hệ</NavLink>
               </NavItem>
             </Nav>
             <div className="nav-item-right d-flex">

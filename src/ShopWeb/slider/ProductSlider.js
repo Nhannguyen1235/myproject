@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductSlider.css';
 import { fetchProducts } from '../redux/productSlice';
+import { Link } from 'react-router-dom';
 
 export default function ProductSlider() {
   const dispatch = useDispatch();
@@ -41,6 +44,7 @@ export default function ProductSlider() {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
+  const firstFiveProducts = products.slice(0, 5);
 
   return (
     <div className="product-slider container mt-4">
@@ -51,6 +55,11 @@ export default function ProductSlider() {
         loop={true}
         pagination={{ clickable: true }}
         navigation
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay, Pagination, Navigation]}
         breakpoints={{
           320: { slidesPerView: 2, spaceBetween: 10 },
           576: { slidesPerView: 2, spaceBetween: 10 },
@@ -59,12 +68,14 @@ export default function ProductSlider() {
           1200: { slidesPerView: 4, spaceBetween: 10 },
         }}
       >
-        {products.map((product, index) => {
+        {firstFiveProducts.map((product, index) => {
           const productImage = require(`../../imgs/${product.image}.jpg`);
 
           return (
             <SwiperSlide key={index}>
+              <Link to={`/product/${product.id}`}>
               <img src={productImage} className="img-fluid" alt={product.name} />
+              </Link>
               <div className="product-info">
                 <h5>{product.name}</h5>
                 <p>${product.price}</p>
