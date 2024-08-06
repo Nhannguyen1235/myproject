@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { nextSlide, prevSlide, setSlide } from '../redux/slicederSlice';
+import { nextSlide, prevSlide, setSlide } from '../redux/sliderSlice';
 import img_slider from '../../imgs/gscd1.jpg';
 import img_slider2 from '../../imgs/gscd1.jpg';
 import img_slider3 from '../../imgs/gscd1.jpg';
 import img_slider4 from '../../imgs/gscd1.jpg';
-import './Slider.css'
+import './Slider.css';
 
 export default function Slider() {
     const dispatch = useDispatch();
@@ -27,11 +27,12 @@ export default function Slider() {
     };
   
     useEffect(() => {
-      const swiper = document.querySelector('.swiper').swiper;
+      const swiper = document.querySelector('.events-slider .swiper').swiper;
       swiper.slideTo(currentSlide);
     }, [currentSlide]);
-  return (
-   <main>
+
+    return (
+      <main>
         <div className="events-slider">
           <Swiper
             onSlideChange={handleSlideChange}
@@ -53,19 +54,19 @@ export default function Slider() {
             ))}
           </Swiper>
           <div className="buttons">
-          <button onClick={handlePrev} id="prev">{"<"}</button>
-          <button onClick={handleNext} id="next">{">"}</button>
+            <button onClick={handlePrev} id="prev">{"<"}</button>
+            <button onClick={handleNext} id="next">{">"}</button>
           </div>
           <ul className="dots">
-        {[...Array(totalSlides)].map((_, index) => (
-          <li
-            key={index}
-            className={index === currentSlide ? 'active' : ''}
-            onClick={() => dispatch(setSlide(index))}
-          ></li>
-        ))}
-      </ul>
+            {[...Array(totalSlides)].map((_, index) => (
+              <li
+                key={index}
+                className={index === currentSlide ? 'active' : ''}
+                onClick={() => dispatch(setSlide(index))}
+              ></li>
+            ))}
+          </ul>
         </div>
       </main>
-  )
+    );
 }
