@@ -1,0 +1,34 @@
+.sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .sidebar-content {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;
+    padding: 1rem;
+    background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 10%;
+  }
+  .card-content{
+    height: 80%;
+  }
+  .btn-view{
+    margin: 3px;
+  }
+
+  @media (max-width: 767px) {
+    .sidebar {
+      position: static;
+      height: auto;
+      overflow-y: visible;
+    }
+  }

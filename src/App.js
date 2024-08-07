@@ -8,6 +8,7 @@ import './style.css'
 import Contact from './pages/Contact/Contact';
 import Products from './pages/Products/Products';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
+import Carts from './pages/Carts/Carts';
 
 export default function App() {
   return (
@@ -18,8 +19,12 @@ export default function App() {
         <Routes>
           <Route index element={<Home />} exact />
           <Route path="/contact" element={<Contact />} exact />
+          <Route path="/cart" element={<Carts />} exact />
           <Route path="/product/:productId" element={<ProductDetail />} exact />
           <Route path="/products" element={<Products />} exact />
+          <Route path="/products/:category/:price" element={<Products />} />
+          <Route path="/products/:category/" element={<Products />} />
+          <Route path="/products/:price" element={<Products />} />
         </Routes>
       </BrowserRouter>
     </Provider>

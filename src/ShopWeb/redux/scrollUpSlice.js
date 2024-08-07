@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-const scrollUpSlice = createSlice({
+const scrollUp = createSlice({
   name: 'scrollUp',
   initialState: {
-    showScrollTopButton: false,
+    scrollUp: false,
   },
   reducers: {
-    showScrollTopButton: (state) => {
-      state.showScrollTopButton = true;
+    setScrollUp(state) {
+      state.scrollUp = true;
     },
-    hideScrollTopButton: (state) => {
-      state.showScrollTopButton = false;
-    },
-  },
+    hideScrollUp(state) {
+      state.scrollUp = false;
+    }
+  }
 });
 
-export const { showScrollTopButton, hideScrollTopButton } = scrollUpSlice.actions;
-export default scrollUpSlice.reducer;
+export const { setScrollUp, hideScrollUp } = scrollUp.actions;
+export default scrollUp.reducer;

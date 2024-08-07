@@ -1,8 +1,9 @@
-import React from 'react'
-import { FaFacebook, FaTwitter, FaInstagramSquare } from "react-icons/fa";
+import React from 'react';
+import { FaFacebook, FaTwitter, FaInstagramSquare } from 'react-icons/fa';
+
 export default function Footer() {
   return (
-<footer className="footer w-100  bg-dark text-white py-4">
+    <footer className="footer w-100 bg-dark text-white py-4">
       <div className="container text-center">
         <div className="row">
           <div className="col-md-4">
@@ -15,7 +16,7 @@ export default function Footer() {
             <p>Phone: +123 456 7890</p>
           </div>
           <div className="col-md-4">
-          <h5>Follow Us</h5>
+            <h5>Follow Us</h5>
             <button 
               type="button" 
               className="btn btn-link text-white me-3"
@@ -28,14 +29,14 @@ export default function Footer() {
               className="btn btn-link text-white me-3"
               onClick={() => window.location.href='https://www.twitter.com'}
             >
-              <i><FaTwitter/></i>
+              <i><FaTwitter /></i>
             </button>
             <button 
               type="button" 
               className="btn btn-link text-white"
               onClick={() => window.location.href='https://www.instagram.com'}
             >
-              <i><FaInstagramSquare/></i>
+              <i><FaInstagramSquare /></i>
             </button>
           </div>
         </div>
@@ -44,5 +45,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

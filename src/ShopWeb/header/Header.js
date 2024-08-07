@@ -53,7 +53,7 @@ export default function Header() {
                 </InputGroup>
               </NavItem>
               <NavItem>
-                <NavLink className="cart fs-3" href="">
+                <NavLink className="cart fs-3" href="/cart">
                   <BsCart />
                 </NavLink>
               </NavItem>
