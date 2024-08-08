@@ -6,16 +6,36 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./Product.css";
+import { addCart } from "../redux/cartSlice";
+import Swal from "sweetalert2";
 
 export default function Product() {
   const dispatch = useDispatch();
   const { productId } = useParams();
+  const carts = useSelector((state) => state.carts.carts);
   const [mainImage, setMainImage] = useState("");
   const swiperRef = useRef(null);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+   // Lưu carts vào localStorage khi có thay đổi
+   useEffect(() => {
+    // Chỉ lưu vào localStorage khi carts thay đổi
+    if (carts.length > 0) {
+      localStorage.setItem('carts', JSON.stringify(carts));
+    }
+  }, [carts]);
+
+  const handleAddToCart = (product) => {
+    dispatch(addCart(product));
+    Swal.fire({
+      title: "Great!",
+      text: "Added to cart successfully!",
+      icon: "success"
+    });
+  };
 
   const product = useSelector((state) =>
     state.products.products.find((product) => product.id === productId)
@@ -98,7 +118,7 @@ export default function Product() {
             Description: Lorem ipsum dolor sit amet, consectetur adipiscing
             elit. Nullam non urna sit amet tortor sollicitudin pharetra.
           </p>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to Cart</button>
         </div>
       </div>
       <div className="row mt-4 d-none d-md-flex">

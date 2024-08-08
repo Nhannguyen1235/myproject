@@ -22,8 +22,10 @@ export default function App() {
           <Route path="/cart" element={<Carts />} exact />
           <Route path="/product/:productId" element={<ProductDetail />} exact />
           <Route path="/products" element={<Products />} exact />
+          <Route path="/products/:category/:price/:search" element={<Products />} />
           <Route path="/products/:category/:price" element={<Products />} />
           <Route path="/products/:category/" element={<Products />} />
+          <Route path="/products/search/:search/" element={<Products />} />
           <Route path="/products/:price" element={<Products />} />
         </Routes>
       </BrowserRouter>

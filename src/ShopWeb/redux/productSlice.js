@@ -2,80 +2,93 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const url = 'https://66a07af87053166bcabb8822.mockapi.io/product';
-//lấy danh sách sản phẩm từ api
+
+// Lấy danh sách sản phẩm từ API
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
     const response = await axios.get(url);
     return response.data;
 });
-//khởi tạo trạng thái
+
+// Khởi tạo trạng thái ban đầu
 const initialState = {
-    products: [],
-    filteredProducts: [],
-    status: 'idle',
-    error: '',
-    selectedCategory: 'all',
-    selectedPrice: 'all',
+    products: [],            // Danh sách tất cả các sản phẩm
+    filteredProducts: [],    // Danh sách sản phẩm đã được lọc
+    status: 'idle',          // Trạng thái của yêu cầu (idle, loading, succeeded, failed)
+    error: '',               // Lỗi nếu có khi lấy sản phẩm từ API
+    selectedCategory: 'all', // Danh mục sản phẩm đã chọn
+    selectedPrice: 'all',    // Phạm vi giá đã chọn
+    searchTerm: '',          // Từ khóa tìm kiếm
 };
-//tạo slice redux
+
+// Tạo slice Redux
 const productSlice = createSlice({
     name: 'products',
     initialState,
-    //hàm cập nhật trạng thái
     reducers: {
+        // Cập nhật danh mục lọc sản phẩm
         setCategory: (state, action) => {
             const category = action.payload.toLowerCase();
             state.selectedCategory = category;
-            //lọc theo danh mục
-            state.filteredProducts = state.products.filter(product => 
-                category === 'all' || 
-                product.category.map(c => c.toLowerCase()).includes(category)
+            // Áp dụng bộ lọc dựa trên danh mục, phạm vi giá và từ khóa tìm kiếm
+            state.filteredProducts = state.products.filter(product =>
+                (category === 'all' || product.category.map(c => c.toLowerCase()).includes(category)) &&
+                (state.searchTerm === '' || product.name.toLowerCase().includes(state.searchTerm)) &&
+                (state.selectedPrice === 'all' ||
+                (state.selectedPrice === 'under $50' && product.price < 50) ||
+                (state.selectedPrice === '$50 - $100' && product.price >= 50 && product.price <= 100) ||
+                (state.selectedPrice === 'above $100' && product.price > 100))
             );
         },
+        // Cập nhật phạm vi giá lọc sản phẩm
         setPrice: (state, action) => {
             const priceRange = action.payload.toLowerCase();
             state.selectedPrice = priceRange;
-            // lọc theo giá
-            state.filteredProducts = state.products.filter(product => {
-                switch (priceRange) {
-                    case 'under $50':
-                        return product.price < 50;
-                    case '$50 - $100':
-                        return product.price >= 50 && product.price <= 100;
-                    case 'above $100':
-                        return product.price > 100;
-                    case 'all':
-                    default:
-                        return true;
-                }
-            }).filter(product => 
-                state.selectedCategory === 'all' || 
-                product.category.map(c => c.toLowerCase()).includes(state.selectedCategory)
+            // Áp dụng bộ lọc dựa trên phạm vi giá, danh mục và từ khóa tìm kiếm
+            state.filteredProducts = state.products.filter(product =>
+                (state.selectedCategory === 'all' || product.category.map(c => c.toLowerCase()).includes(state.selectedCategory)) &&
+                (state.searchTerm === '' || product.name.toLowerCase().includes(state.searchTerm)) &&
+                (priceRange === 'all' ||
+                (priceRange === 'under $50' && product.price < 50) ||
+                (priceRange === '$50 - $100' && product.price >= 50 && product.price <= 100) ||
+                (priceRange === 'above $100' && product.price > 100))
+            );
+        },
+        // Cập nhật từ khóa tìm kiếm
+        setSearchTerm: (state, action) => {
+            const searchTerm = action.payload.toLowerCase();
+            state.searchTerm = searchTerm;
+            // Áp dụng bộ lọc tìm kiếm
+            state.filteredProducts = state.products.filter(product =>
+                (state.selectedCategory === 'all' || product.category.map(c => c.toLowerCase()).includes(state.selectedCategory)) &&
+                (state.selectedPrice === 'all' ||
+                (state.selectedPrice === 'under $50' && product.price < 50) ||
+                (state.selectedPrice === '$50 - $100' && product.price >= 50 && product.price <= 100) ||
+                (state.selectedPrice === 'above $100' && product.price > 100)) &&
+                (product.name.toLowerCase().includes(searchTerm))
             );
         },
     },
-    //xử lý các tình huống khi lấy sản phẩm từ Api
     extraReducers: (builder) => {
         builder
-            // đang gửi yêu cầu và chờ phản hồi
+            // Khi yêu cầu lấy sản phẩm từ API đang chờ phản hồi
             .addCase(fetchProducts.pending, (state) => {
                 state.status = 'loading';
             })
-            // đã lấy thành công
+            // Khi lấy sản phẩm từ API thành công
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                //action.payload chứa dữ liệu sản phẩm
                 state.products = action.payload;
-                // Apply initial filters based on URL parameters
-                state.filteredProducts = action.payload.filter(product => 
-                    (state.selectedCategory === 'all' || 
-                    product.category.map(c => c.toLowerCase()).includes(state.selectedCategory)) &&
-                    (state.selectedPrice === 'all' || 
+                // Áp dụng bộ lọc ban đầu dựa trên các trạng thái tìm kiếm, danh mục và giá
+                state.filteredProducts = action.payload.filter(product =>
+                    (state.selectedCategory === 'all' || product.category.map(c => c.toLowerCase()).includes(state.selectedCategory)) &&
+                    (state.selectedPrice === 'all' ||
                     (state.selectedPrice === 'under $50' && product.price < 50) ||
                     (state.selectedPrice === '$50 - $100' && product.price >= 50 && product.price <= 100) ||
-                    (state.selectedPrice === 'above $100' && product.price > 100))
+                    (state.selectedPrice === 'above $100' && product.price > 100)) &&
+                    (product.name.toLowerCase().includes(state.searchTerm.toLowerCase()))
                 );
             })
-            // xử lý lỗi
+            // Khi yêu cầu lấy sản phẩm từ API bị lỗi
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
@@ -83,6 +96,6 @@ const productSlice = createSlice({
     },
 });
 
-export const { setCategory, setPrice } = productSlice.actions;
+export const { setCategory, setPrice, setSearchTerm } = productSlice.actions;
 
 export default productSlice.reducer;

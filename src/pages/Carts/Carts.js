@@ -9,7 +9,6 @@ export default function Carts() {
     <div className="d-flex flex-column min-vh-100">
         <Header/>
         <main className="flex-fill">
-        <h1>Cart</h1>
         <Cart/>
         </main>
         <Footer/>

@@ -14,6 +14,7 @@ import BrandSlider from "../../ShopWeb/slider/BrandSlider";
 import ProductSlider from "../../ShopWeb/slider/ProductSlider";
 import { NavLink } from "reactstrap";
 import ScrollUp from "../../ShopWeb/scrollUp/ScrollUp";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   AOS.init();
@@ -32,14 +33,13 @@ export default function Home() {
         <div className="colections row text-center">
         <div className="men_colection col-lg-4"  data-aos="fade-right" data-aos-delay="200">
             <div className="box__men_colection p-3">
-              <a href="/products/men"><img src={SBC_men}></img><button className="btn-filter btn btn-outline-secondary">Men's</button></a>
+            <Link to={"/products/men"}><img src={SBC_men}></img><button className="btn-filter btn btn-outline-secondary">Men's</button></Link>
               
             </div>
         </div>
         <div className="women_colection col-lg-4" data-aos="fade-left" data-aos-delay="200">
             <div className="box_women_colection p-3">
-              <a href="/products/women"><img src={SBC_women}></img><button className="btn-filter btn btn-outline-secondary">Women's</button></a>
-              
+              <Link to={"/products/women"}><img src={SBC_women}></img><button className="btn-filter btn btn-outline-secondary">Women's</button></Link>
             </div>
         </div>
         </div>
