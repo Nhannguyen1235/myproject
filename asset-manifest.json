@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/myproject/static/css/main.445edd68.css",
-    "main.js": "/myproject/static/js/main.0cf665fc.js",
+    "main.js": "/myproject/static/js/main.6bdd6a87.js",
     "static/media/banner-fashion_113854663.jpg": "/myproject/static/media/banner-fashion_113854663.e752b4d64936aecccddc.jpg",
     "static/media/1931319.jpg": "/myproject/static/media/1931319.ddebd7b3e737be450c65.jpg",
     "static/media/SBC_women.png": "/myproject/static/media/SBC_women.1fd4742c273ab824dff1.png",
@@ -123,10 +123,10 @@
     "static/media/45007_d_fm.jpg": "/myproject/static/media/45007_d_fm.57017f47617ef899a864.jpg",
     "index.html": "/myproject/index.html",
     "main.445edd68.css.map": "/myproject/static/css/main.445edd68.css.map",
-    "main.0cf665fc.js.map": "/myproject/static/js/main.0cf665fc.js.map"
+    "main.6bdd6a87.js.map": "/myproject/static/js/main.6bdd6a87.js.map"
   },
   "entrypoints": [
     "static/css/main.445edd68.css",
-    "static/js/main.0cf665fc.js"
+    "static/js/main.6bdd6a87.js"
   ]
 }
