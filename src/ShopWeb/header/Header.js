@@ -52,16 +52,16 @@ export default function Header() {
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar className="me-auto">
               <NavItem>
-                <NavLink href="/">Home</NavLink>
+                <NavLink href="/myproject/#/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/products">Products</NavLink>
+                <NavLink href="/myproject/#/products">Products</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/contact">Contact</NavLink>
+                <NavLink href="/myproject/#/contact">Contact</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/login">Login</NavLink>
+                <NavLink href="/myproject/#/login">Login</NavLink>
               </NavItem>
             </Nav>
             <div className="nav-item-right d-flex">
@@ -79,7 +79,7 @@ export default function Header() {
                 </InputGroup>
               </NavItem>
               <NavItem>
-                <NavLink className="cart fs-3" href="/cart">
+                <NavLink className="cart fs-3" href="/myproject/#/cart">
                   <BsCart />
                   <div className="cartQuantity text-center">
                     <p className="number">{cartCount}</p>
