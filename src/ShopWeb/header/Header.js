@@ -60,6 +60,9 @@ export default function Header() {
               <NavItem>
                 <NavLink href="/contact">Contact</NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink href="/login">Login</NavLink>
+              </NavItem>
             </Nav>
             <div className="nav-item-right d-flex">
               <NavItem className="me-3">

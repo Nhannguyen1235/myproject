@@ -52,16 +52,16 @@ export default function Home() {
         <h1>Trending Category</h1>
         <div className="row " id="row">
           <div className="box col-md-4" >
-            <NavLink className="icon" data-aos="flip-left" data-aos-delay="300" href=""><LuShirt /></NavLink>
+            <NavLink className="icon" data-aos="flip-left" data-aos-delay="300" href="/products/vest"><LuShirt /></NavLink>
           </div>
           <div className="box col-md-4">
-            <NavLink className="icon" data-aos="flip-left" data-aos-delay="500" href=""><PiHoodieLight /></NavLink>
+            <NavLink className="icon" data-aos="flip-left" data-aos-delay="500" href="/products/hoodie"><PiHoodieLight /></NavLink>
           </div>
           <div className="box col-md-4">
-            <NavLink className="icon" data-aos="flip-left" data-aos-delay="700" href=""><TbBrandRedhat /></NavLink>
+            <NavLink className="icon" data-aos="flip-left" data-aos-delay="700" href="/products/hat"><TbBrandRedhat /></NavLink>
           </div>
           <div className="box col-md-4">
-            <NavLink className="icon" data-aos="flip-left" data-aos-delay="900" href=""><GiPoloShirt /></NavLink>
+            <NavLink className="icon" data-aos="flip-left" data-aos-delay="900" href="/products/men"><GiPoloShirt /></NavLink>
           </div>
         </div>
       </section>

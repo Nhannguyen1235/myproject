@@ -9,13 +9,15 @@ import Contact from './pages/Contact/Contact';
 import Products from './pages/Products/Products';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Carts from './pages/Carts/Carts';
+import CheckOut from './pages/CheckOut/CheckOut';
+import Login from './pages/Login/Login';
 
 export default function App() {
   return (
     <div>
       <Provider store={store}>
         {/* nhớ đổi qua hashRouter khi đưa lên domain */}
-      <BrowserRouter basename="/">
+      <HashRouter basename="/">
         <Routes>
           <Route index element={<Home />} exact />
           <Route path="/contact" element={<Contact />} exact />
@@ -24,11 +26,14 @@ export default function App() {
           <Route path="/products" element={<Products />} exact />
           <Route path="/products/:category/:price/:search" element={<Products />} />
           <Route path="/products/:category/:price" element={<Products />} />
+          <Route path="/checkouts/" element={<CheckOut />} />
           <Route path="/products/:category/" element={<Products />} />
           <Route path="/products/search/:search/" element={<Products />} />
           <Route path="/products/:price" element={<Products />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Home />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
     </div>
   )

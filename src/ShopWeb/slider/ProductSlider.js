@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductSlider.css';
 import { fetchProducts } from '../redux/productSlice';
 import { Link } from 'react-router-dom';
+import { addCart } from '../redux/cartSlice';
+import Swal from 'sweetalert2';
 
 export default function ProductSlider() {
   const dispatch = useDispatch();
@@ -25,6 +27,15 @@ export default function ProductSlider() {
   const handlePrev = () => {
     setCurrentProductSlide((prevSlide) => prevSlide - 1);
   };
+  const handleAddToCart = (product) => {
+    dispatch(addCart(product)); // Dispatch action thêm sản phẩm vào giỏ hàng
+    Swal.fire({
+      title: "Great!",
+      text: "Added to cart successfully!",
+      icon: "success"
+    }); // Hiển thị thông báo thành công
+  };
+
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -73,13 +84,49 @@ export default function ProductSlider() {
 
           return (
             <SwiperSlide key={index}>
-              <Link to={`/product/${product.id}`}>
-              <img src={productImage} className="img-fluid" alt={product.name} />
-              </Link>
-              <div className="product-info">
-                <h5>{product.name}</h5>
-                <p>${product.price}</p>
-              </div>
+              <div key={product.id} className="">
+                  <div className="card h-100" data-aos="zoom-in-up">
+                    <Link to={`/product/${product.id}`}>
+                      <img
+                        src={productImage}
+                        className="card-img-top"
+                        alt={product.name}
+                      />
+                    </Link>
+                    <div className="card-body">
+                      <div className="card-content">
+                        <h5 className="card-name-slider">{product.name}</h5>
+                        <p className="card-text">Price: ${product.price}</p>
+                        <p className="card-text">
+                          Category:{" "}
+                          {product.category.map((cat, index) => (
+                            <span key={index}>
+                              <Link
+                                to={`/products/${cat.toLowerCase()}`}
+                                className="category-link"
+                              >
+                                {cat}
+                              </Link>
+                              {index < product.category.length - 1 && ", "}
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="btn btn-view btn-outline-dark"
+                      >
+                        View Details
+                      </Link>
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        className="btn btn-view btn-outline-dark"
+                      >
+                        Add To Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
             </SwiperSlide>
           );
         })}

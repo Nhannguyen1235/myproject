@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="row">
           <div className="col-md-4">
             <h5>About Us</h5>
-            <p>Some information about the company.</p>
+            <p>At our shop, we are passionate about industry. Since our founding in 2003, we have been committed to brief description of what you do or offer. Our mission is to state your mission, and we strive to describe how you achieve this mission.</p>
           </div>
           <div className="col-md-4">
             <h5>Contact</h5>

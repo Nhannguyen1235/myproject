@@ -100,4 +100,7 @@
     .content {
       left: -40%;
     }
+    .item img {
+      object-fit: contain;
+    }
   }

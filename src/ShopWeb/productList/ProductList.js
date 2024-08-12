@@ -176,7 +176,7 @@ export default function ProductList() {
                     </Link>
                     <div className="card-body">
                       <div className="card-content">
-                        <h5 className="card-title">{product.name}</h5>
+                        <h5 className="card-name">{product.name}</h5>
                         <p className="card-text">Price: ${product.price}</p>
                         <p className="card-text">
                           Category:{" "}
